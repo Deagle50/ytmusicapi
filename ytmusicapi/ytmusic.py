@@ -15,6 +15,7 @@ from ytmusicapi.mixins.explore import ExploreMixin
 from ytmusicapi.mixins.library import LibraryMixin
 from ytmusicapi.mixins.playlists import PlaylistsMixin
 from ytmusicapi.mixins.uploads import UploadsMixin
+import unicodedata
 
 
 class YTMusic(BrowsingMixin, SearchMixin, WatchMixin, ExploreMixin, LibraryMixin, PlaylistsMixin,
@@ -29,7 +30,7 @@ class YTMusic(BrowsingMixin, SearchMixin, WatchMixin, ExploreMixin, LibraryMixin
                  user: str = None,
                  requests_session=True,
                  proxies: dict = None,
-                 language: str = 'en'):
+                 language: str = 'es'):
         """
         Create a new instance to interact with YouTube Music.
 
@@ -101,6 +102,7 @@ class YTMusic(BrowsingMixin, SearchMixin, WatchMixin, ExploreMixin, LibraryMixin
         # prepare context
         self.context = initialize_context()
         self.context['context']['client']['hl'] = language
+        unicodedata.normalize
         locale_dir = os.path.abspath(os.path.dirname(__file__)) + os.sep + 'locales'
         supported_languages = [f for f in os.listdir(locale_dir)]
         if language not in supported_languages:
